@@ -2,14 +2,15 @@
 the sys module is a built-in module that provides access to various system-specific parameters and functions. 
 It is often used for tasks related to interacting with the Python interpreter and the underlying operating system."""
 import sys
-import logging
+from src.logger import logging
+
+
 """
 In Python, exc_tb is an abbreviation for "exception traceback," 
 It's part of the information that Python provides when an error or exception occurs in your code. 
 When an exception happens, Python creates a traceback, which is like a log of what the program was doing when the error occurred. 
 It shows the sequence of function calls and the line numbers in your code."""
 
-import logging
 def error_message_detail(error,error_detail:sys):
     _,_,exc_tb=error_detail.exc_info()
     file_name=exc_tb.tb_frame.f_code.co_filename
@@ -44,3 +45,12 @@ class CustomException(Exception):
 
 
 
+if __name__=="__main__":
+
+    try:
+        a=1/0
+
+    except Exception as e:
+        logging.info("Divide by zero")
+        raise CustomException(e, sys)
+    
